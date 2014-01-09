@@ -37,13 +37,13 @@
                 </div>
             </div><!-- /.navbar-container -->
         </nav>
-        <div class="page color-3" id="guests" ng-controller="AllGuestsController">
+        <div class="page color-3" ng-controller="GuestsController as guestCtrl" ng-init="guestCtrl.init('0', '16', '2')">
             <div class="inner-page">
                 <h2 class="page-headline">All Guests</h2>
             </div>
             <div class="row inner-page">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
+                    <input type="text" class="form-control" placeholder="Search"  ng-model="guestCtrl.term" ng-enter="guestCtrl.search()">
                 </div>
             </div>
             <div class="row inner-page team" ng-repeat="row in guestRows">
@@ -68,7 +68,7 @@
                 </div>
             </div>
             <div class="row inner-page">
-                <div class="col-md-12"><a href="#" class="btn btn-primary btn-centered" title="View all podcasts"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
+                <div class="col-md-12"><a ng-click="guestCtrl.more()" class="btn btn-primary btn-centered" title="View all podcasts"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
             </div>
         </div>
         <div class="page color-2">

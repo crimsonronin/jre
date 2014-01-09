@@ -38,7 +38,7 @@ JreData.Podcasts = {
 };
 
 JreData.Guests = {
-    get: function(limit, offset) {
+    get: function(offset, limit, search) {
         if (!limit) {
             limit = 2;
         }
@@ -47,7 +47,20 @@ JreData.Guests = {
         }
 
         var Guest = Parse.Object.extend('Guest');
-        var query = new Parse.Query(Guest);
+
+        if (search) {
+            var nameQ = new Parse.Query(Guest);
+            nameQ.startsWith('name', search);
+
+            var episodeQ = new Parse.Query(Guest);
+            episodeQ.equalTo('episodes', search);
+
+            var query = Parse.Query.or(nameQ, episodeQ);
+        } else {
+
+            var query = new Parse.Query(Guest);
+        }
+
         query.descending("lastAppearance");
         query.limit(limit);
         query.skip(offset);
@@ -61,9 +74,9 @@ JreData.Guests = {
 
 };
 
-jreApp = angular.module('jreApp', []).config(function($interpolateProvider){
-        $interpolateProvider.startSymbol('##').endSymbol('##');
-    }
+jreApp = angular.module('jreApp', []).config(function($interpolateProvider) {
+    $interpolateProvider.startSymbol('##').endSymbol('##');
+}
 );
 
 jreApp.directive('youtube', function($sce) {
@@ -79,5 +92,19 @@ jreApp.directive('youtube', function($sce) {
                 }
             });
         }
+    };
+});
+
+jreApp.directive('ngEnter', function() {
+    return function(scope, element, attrs) {
+        element.bind("keydown keypress", function(event) {
+            if (event.which === 13) {
+                scope.$apply(function() {
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
     };
 });
