@@ -1,0 +1,135 @@
+<div class="page color-1" id="home" ng-controller="FeaturedPodcastController">
+    <div  ng-repeat="podcast in podcasts">
+        <div class="inner-page">
+            <h2 class="page-headline large">Episode #<span ng-bind="podcast.episode"></span> - <span ng-bind="podcast.guests.join(', ')"></span></h2>
+        </div>
+        <div class="row inner-page">
+            <div class="col-md-8 col-md-push-4 lazy-container loaded">
+                <div youtube code="podcast.featureVideo"></div>
+            </div>
+            <div class="col-md-4 col-md-pull-8">
+                <div><h3><i class="fa fa-clock-o"></i> <span ng-bind="podcast.date"></span></h3></div>
+                <div><p ng-bind="podcast.description"></p></div>
+                <div><a ng-href="http://traffic.libsyn.com/joeroganexp/p##podcast.episode##.mp3" target="_blank"><i class="fa fa-download"></i> Download mp3</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page color-4" id="podcasts">
+    <div class="inner-page">
+        <h2 class="page-headline">Recent Podcasts</h2>
+    </div>
+    <div class="inner-page row" ng-controller="PodcastsController">
+        <div class="features list-inline" ng-repeat="podcast in podcasts">
+            <div ng-switch on="$index % 3">
+                <div ng-switch-when="0">
+                    <div class="row">
+                        <div ng-show="podcasts[$index+0]" class="col-md-4">
+                            <div youtube code="podcasts[$index+0].featureVideo"></div>
+                            <h3>#<span ng-bind="podcasts[$index+0].episode"></span> - <span ng-bind="podcasts[$index+0].guests[0]"></span></h3>
+                            <div class="color-3 podcast-date-container">
+                                <h6 class="clearfix">
+                                    <div class="pull-left">
+                                        <i class="fa fa-clock-o"></i> <span ng-bind="podcasts[$index+0].date"></span>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a ng-href="http://traffic.libsyn.com/joeroganexp/p##podcasts[$index+0].episode##.mp3" target="_blank">
+                                            <i class="fa fa-download"></i> Download mp3</a>
+                                    </div>
+                                </h6>
+                            </div>
+                            <p ng-bind="podcasts[$index+0].description"></p>
+                        </div>
+                        <div ng-show="podcasts[$index+1]" class="col-md-4">
+                            <div youtube code="podcasts[$index+1].featureVideo"></div>
+                            <h3>#<span ng-bind="podcasts[$index+1].episode"></span> - <span ng-bind="podcasts[$index+1].guests[0]"></span></h3>
+                            <div class="color-3 podcast-date-container">
+                                <h6 class="clearfix">
+                                    <div class="pull-left">
+                                        <i class="fa fa-clock-o"></i> <span ng-bind="podcasts[$index+1].date"></span>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a ng-href="http://traffic.libsyn.com/joeroganexp/p##podcasts[$index+1].episode##.mp3" target="_blank">
+                                            <i class="fa fa-download"></i> Download mp3</a>
+                                    </div>
+                                </h6>
+                            </div>
+                            <p ng-bind="podcasts[$index+1].description"></p>
+                        </div>
+                        <div ng-show="podcasts[$index+2]" class="col-md-4">
+                            <div youtube code="podcasts[$index+2].featureVideo"></div>
+                            <h3>#<span ng-bind="podcasts[$index+2].episode"></span> - <span ng-bind="podcasts[$index+2].guests[0]"></span></h3>
+                            <div class="color-3 podcast-date-container">
+                                <h6 class="clearfix">
+                                    <div class="pull-left">
+                                        <i class="fa fa-clock-o"></i> <span ng-bind="podcasts[$index+2].date"></span>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a ng-href="http://traffic.libsyn.com/joeroganexp/p##podcasts[$index+2].episode##.mp3" target="_blank">
+                                            <i class="fa fa-download"></i> Download mp3</a>
+                                    </div>
+                                </h6>
+                            </div>
+                            <p ng-bind="podcasts[$index+2].description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"><a href="#" class="btn btn-primary btn-centered" title="View all podcasts"> <i class="fa fa-film"></i> View all podcasts</a></div>
+        </div>
+    </div>
+</div>
+<div class="page color-3" id="guests" ng-controller="GuestsController">
+    <div class="inner-page">
+        <h2 class="page-headline">Recent Guests</h2>
+    </div>
+    <div class="row inner-page team">
+        <div class="col-md-6" ng-repeat="guest in guests">
+            <div class="clearfix guest-details-container">
+                <div ng-if="guest.image" class="col-md-4">
+                    <img class="img-responsive" ng-src="##guest.image##"/>
+                </div>
+                <div class="col-md-8">
+                    <h4><a ng-href="/all-guests?name=##guest.url##"><span ng-bind="guest.name"></span></a></h4>
+                    <p ng-bind="guest.description"></p>
+                    <ul ng-if="guest.twitterUsername">
+                        <li><i class="fa fa-twitter"></i> <a ng-href="http://twitter.com/##guest.twitterUsername##">@<span ng-bind="guest.twitterUsername"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="color-4 guest-episodes-container">
+                Episodes: <a href="#">#412</a>, <a href="#">#234</a>
+            </div>
+        </div>
+    </div>
+    <div class="row inner-page">
+        <div class="col-md-12"><a href="#" class="btn btn-primary btn-centered" title="View all podcasts"> <i class="fa fa-group"></i> View all guests</a></div>
+    </div>
+</div>
+<div class="page color-2" id="about">
+    <div class="inner-page">
+        <h2 class="page-headline">About</h2>
+    </div>
+    <div class="row inner-page">
+        <div class="col-md-7 btn-container">
+            <img src="assets/gorilla.png" class="figurette lazy" style="display: block;">
+        </div>
+
+        <div class="col-md-5">
+            <h3>This site is in no way affiliacted with Joe Rogan or the Joe Rogan Experience podcast.</h3>
+            <p>I'm just a fan that wanted a simple way to search podcasts and podcast guests.</p>
+            <p>I have a lot of ideas that I would like to try and implement eg.</p>
+            <ul class="bullet">
+                <li>A soundcloud style comments and reference section which would link a comment to a particular time on the video.</li>
+                <li>A reference/annotation list containing all the urls/sites mentioned in the podcast.</li>
+            </ul>
+            <p>This site is still very much a work in progress, so if you want to help me maintain it or have any comments hit me up <a href="https://twitter.com/zoopdevelopment">@zoopdevelopment</a>, <a href="mailto:josh@zoopcommerce.com">josh@zoopcommerce.com</a> or <a href="http://forums.joerogan.net/member.php?u=67344">crimsonronin</a> on the Rogan board.</p>
+            <hr>
+            <p>Also if you want an awesome free online store check out my company <a href="http://zoopcommerce.com">zoopcommerce.com</a>.</p>
+            <p>Grab the source code of this site on github:</p>
+            <a title="Check out more features" class="btn btn-primary btn-centered" href="#"> <i class="fa fa-github"></i> View on GitHub</a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="page color-3" id="guests" ng-controller="AllGuestsController">
+    <div class="inner-page">
+        <h2 class="page-headline">All Guests</h2>
+    </div>
+    <div class="row inner-page">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+        </div>
+    </div>
+    <div class="row inner-page team" ng-repeat="row in guestRows">
+        <div class="col-md-6" ng-repeat="guest in row.guests">
+            <div class="clearfix guest-details-container">
+                <div ng-if="guest.image" class="col-md-4">
+                    <img class="img-responsive" ng-src="##guest.image##"/>
+                </div>
+                <div class="col-md-8">
+                    <h4><span ng-bind="guest.name"></span></h4>
+                    <p ng-bind="guest.description"></p>
+                    <ul>
+                        <li><i class="fa fa-twitter"></i> <a ng-href="http://twitter.com/##guest.twitterUsername##">@<span ng-bind="guest.twitterUsername"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="color-4 guest-episodes-container">
+                Episodes: <span ng-repeat="episode in guest.episodes">
+                    <a ng-href="http://twitter.com/##episode##">#<span ng-bind="episode"></span></a><span ng-if="$last != true" class="animate-if">, </span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row inner-page">
+        <div class="col-md-12"><a href="#" class="btn btn-primary btn-centered" title="View all podcasts"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
+    </div>
+</div>
+<div class="page color-2">
+
+</div>

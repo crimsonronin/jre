@@ -1,0 +1,157 @@
+[09-Jan-2014 02:15:28 UTC] PHP Fatal error:  Call to undefined function Jre\Fetcher\getHeaders() in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php on line 79
+[09-Jan-2014 02:15:28 UTC] PHP Stack trace:
+[09-Jan-2014 02:15:28 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 02:15:28 UTC] PHP   2. Jre\Fetcher\Parse->savePodcast() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 02:15:28 UTC] PHP   3. Jre\Fetcher\Parse->save() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php:15
+[09-Jan-2014 02:15:28 UTC] PHP   4. Jre\Fetcher\Parse->get() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php:31
+[09-Jan-2014 02:23:02 UTC] PHP Fatal error:  Cannot declare class Jre\Fetcher\Twitter because the name is already in use in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Twitter.php on line 8
+[09-Jan-2014 02:23:02 UTC] PHP Stack trace:
+[09-Jan-2014 02:23:02 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 02:23:02 UTC] PHP   2. Composer\Autoload\ClassLoader->loadClass() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 02:23:40 UTC] PHP Fatal error:  Uncaught exception 'ErrorException' with message 'stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages:
+error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed' in /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client/Adapter/Socket.php:276
+Stack trace:
+#0 [internal function]: Zend\Stdlib\ErrorHandler::addError(2, 'stream_socket_e...', '/mnt/www/zoop/v...', 276, Array)
+#1 /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client/Adapter/Socket.php(276): stream_socket_enable_crypto(Resource id #125, true, 2)
+#2 /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client.php(1358): Zend\Http\Client\Adapter\Socket->connect('api.twitter.com', 443, true)
+#3 /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client.php(878): Zend\Http\Client->doRequest(Object(Zend\Uri\Http), 'GET', true, Array, '')
+#4 /mnt/www/zoop/vendor/zendframework/zendoauth/library/ZendOAuth/Client.php(176): Zend\Http\Client->send(NULL)
+#5 /mnt/www/zoop/vendor/zendf in /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client/Adapter/Socket.php on line 299
+[09-Jan-2014 03:17:08 UTC] PHP Parse error:  syntax error, unexpected '}' in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Twitter.php on line 48
+[09-Jan-2014 03:17:08 UTC] PHP Stack trace:
+[09-Jan-2014 03:17:08 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 03:17:08 UTC] PHP   2. Composer\Autoload\ClassLoader->loadClass() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 03:50:37 UTC] PHP Fatal error:  Cannot use [] for reading in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Podcast.php on line 107
+[09-Jan-2014 03:50:37 UTC] PHP Stack trace:
+[09-Jan-2014 03:50:37 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 03:50:37 UTC] PHP   2. Jre\Fetcher\Videos->getList() /mnt/www/zoop/build/fetcher/backfillYouTube.php:10
+[09-Jan-2014 03:50:37 UTC] PHP   3. Jre\Fetcher\Videos->parsePodcasts() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Videos.php:40
+[09-Jan-2014 03:50:37 UTC] PHP   4. Composer\Autoload\ClassLoader->loadClass() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Videos.php:0
+[09-Jan-2014 04:55:08 UTC] PHP Fatal error:  Class 'Jre\Fetcher\Jre\Fetcher\Videos' not found in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php on line 7
+[09-Jan-2014 04:55:08 UTC] PHP Stack trace:
+[09-Jan-2014 04:55:08 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:55:08 UTC] PHP   2. Composer\Autoload\ClassLoader->loadClass() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:55:08 UTC] PHP   3. include() /mnt/www/zoop/vendor/composer/ClassLoader.php:269
+[09-Jan-2014 04:55:37 UTC] PHP Fatal error:  Call to undefined method Jre\Fetcher\Podcast::getSite() in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Podcast.php on line 141
+[09-Jan-2014 04:55:37 UTC] PHP Stack trace:
+[09-Jan-2014 04:55:37 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:55:37 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 04:55:37 UTC] PHP   3. Jre\Fetcher\Parse->savePodcast() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:45
+[09-Jan-2014 04:55:37 UTC] PHP   4. Jre\Fetcher\Podcast->toArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php:18
+[09-Jan-2014 04:56:53 UTC] PHP Fatal error:  Class 'Jre\Fetcher\Jre\Fetcher\Guest' not found in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php on line 59
+[09-Jan-2014 04:56:53 UTC] PHP Stack trace:
+[09-Jan-2014 04:56:53 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:56:53 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 04:58:43 UTC] PHP Notice:  Undefined index: name in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 177
+[09-Jan-2014 04:58:44 UTC] PHP Stack trace:
+[09-Jan-2014 04:58:44 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:58:44 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 04:58:44 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:61
+[09-Jan-2014 04:58:44 UTC] PHP Notice:  Undefined index: description in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 178
+[09-Jan-2014 04:58:44 UTC] PHP Stack trace:
+[09-Jan-2014 04:58:44 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:58:44 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 04:58:44 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:61
+[09-Jan-2014 04:58:44 UTC] PHP Fatal error:  Call to a member function getUser() on a non-object in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 49
+[09-Jan-2014 04:58:44 UTC] PHP Stack trace:
+[09-Jan-2014 04:58:44 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 04:58:44 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 04:58:44 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:61
+[09-Jan-2014 04:58:44 UTC] PHP   4. Jre\Fetcher\Guest->getDescription() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:178
+[09-Jan-2014 04:58:44 UTC] PHP   5. Jre\Fetcher\Guest->getTwitterUser() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:92
+[09-Jan-2014 05:10:20 UTC] PHP Fatal error:  Call to a member function getUser() on a non-object in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 49
+[09-Jan-2014 05:10:20 UTC] PHP Stack trace:
+[09-Jan-2014 05:10:20 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:10:20 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:10:20 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:66
+[09-Jan-2014 05:10:20 UTC] PHP   4. Jre\Fetcher\Guest->getDescription() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:178
+[09-Jan-2014 05:10:20 UTC] PHP   5. Jre\Fetcher\Guest->getTwitterUser() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:92
+[09-Jan-2014 05:16:15 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:15 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:15 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:15 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:15 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:20 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:20 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:21 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:21 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:21 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:26 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:26 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:26 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:26 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:26 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:31 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:31 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:31 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:31 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:31 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:42 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:42 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:42 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:42 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:42 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:48 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:48 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:48 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:48 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:48 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:53 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:53 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:53 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:53 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:53 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:16:59 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 187
+[09-Jan-2014 05:16:59 UTC] PHP Stack trace:
+[09-Jan-2014 05:16:59 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:16:59 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:16:59 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:67
+[09-Jan-2014 05:24:16 UTC] PHP Notice:  Undefined property: Jre\Fetcher\Guest::$episode in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:16 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:16 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:16 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:16 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:16 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:16 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:16 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:16 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:16 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:16 UTC] PHP   4. in_array() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:84
+[09-Jan-2014 05:24:32 UTC] PHP Notice:  Undefined property: Jre\Fetcher\Guest::$episode in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:32 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:32 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:32 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:32 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:32 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:32 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:32 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:32 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:32 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:32 UTC] PHP   4. in_array() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:84
+[09-Jan-2014 05:24:42 UTC] PHP Notice:  Undefined property: Jre\Fetcher\Guest::$episode in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:42 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:42 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:42 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:42 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:42 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:42 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:42 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:42 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:42 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:42 UTC] PHP   4. in_array() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:84
+[09-Jan-2014 05:24:51 UTC] PHP Notice:  Undefined property: Jre\Fetcher\Guest::$episode in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:51 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:51 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:51 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:51 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:51 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 84
+[09-Jan-2014 05:24:51 UTC] PHP Stack trace:
+[09-Jan-2014 05:24:51 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:24:51 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:24:51 UTC] PHP   3. Jre\Fetcher\Guest->addEpisode() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:57
+[09-Jan-2014 05:24:51 UTC] PHP   4. in_array() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php:84
+[09-Jan-2014 05:39:33 UTC] PHP Notice:  Undefined index: lastApperance in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Guest.php on line 184
+[09-Jan-2014 05:39:33 UTC] PHP Stack trace:
+[09-Jan-2014 05:39:33 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYouTube.php:0
+[09-Jan-2014 05:39:33 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYouTube.php:15
+[09-Jan-2014 05:39:33 UTC] PHP   3. Jre\Fetcher\Guest->fromArray() /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php:66
