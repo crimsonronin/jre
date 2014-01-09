@@ -1,0 +1,24 @@
+{
+    "name": "crimsonronin/jre",
+    "description": "Train by day, Joe Rogan podcast by night....all day",
+    "license": "",
+    "keywords": [
+        "zoop",
+        "zf2"
+    ],
+    "homepage": "http://www.thejoeroganexperiencepodcast.com/",
+    "minimum-stability": "dev",
+    "repositories": [],
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendgdata": "2.*",
+        "zendframework/zendservice-twitter": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jre\\": "module/Jre/src"
+        }
+    },
+    "extra": {
+    }
+}
