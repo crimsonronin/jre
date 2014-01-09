@@ -1,88 +1,114 @@
 jreApp.controller('GuestsController', function($scope) {
     $scope.guests = [];
+    var self = this;
+    this.term = '';
+    this.offset = 0;
+    this.limit = 16;
+    this.numPerRow = 2;
 
-    var guestsCollection = JreData.Guests.get();
+    this.init = function(offset, limit, numPerRow)
+    {
+        self.offset = Number(offset);
+        self.limit = Number(limit);
+        self.numPerRow = Number(numPerRow);
 
-    guestsCollection.fetch({
-        success: function(podcastGuests) {
-            var guests = new Array;
-            podcastGuests.each(function(guest) {
-                var date;
-                var lastAppearance = guest.get("lastAppearance");
-                if (lastAppearance && lastAppearance.date) {
-                    date = moment(guest.get("lastAppearance").date).format('Do MMM YYYY');
-                }
-
-                guests.push({
-                    name: guest.get("name"),
-                    url: encodeURIComponent(guest.get("name")),
-                    description: guest.get("description"),
-                    image: guest.get("image"),
-                    twitterUsername: guest.get("twitterUsername"),
-                    episodes: guest.get("episodes"),
-                    site: guest.get("site"),
-                    lastAppearance: date
-                });
-            });
-
-            $scope.$apply(function() {
-                $scope.guests = guests;
-            });
-            jqueryFuncs.refreshScroll();
-        },
-        error: function(guests, error) {
-
+        if (self.term == '') {
+            self.load();
         }
-    });
-});
-jreApp.controller('AllGuestsController', function($scope) {
-    $scope.guests = [];
+    };
 
-    var guestsCollection = JreData.Guests.get(16, 0);
+    this.parse = function parse(podcastGuests) {
+        var guestRows = new Array;
+        var numPerRow = self.numPerRow;
+        var counter = 0;
+        var length = podcastGuests.length;
+        var guestRow = new Array;
 
-    guestsCollection.fetch({
-        success: function(podcastGuests) {
-            var guestRows = new Array;
-            var numPerRow = 2;
-            var counter = 0;
-            var length = podcastGuests.length;
-            var guestRow = new Array;
+        podcastGuests.each(function(guest) {
+            if (counter == 0 || counter % numPerRow == 0) {
+                guestRow = new Array;
+            }
+            var date;
+            var lastAppearance = guest.get("lastAppearance");
+            if (lastAppearance && lastAppearance.date) {
+                date = moment(guest.get("lastAppearance").date).format('Do MMM YYYY');
+            }
 
-            podcastGuests.each(function(guest) {
-                if (counter == 0 || counter % numPerRow == 0) {
-                    guestRow = new Array;
-                }
-                var date;
-                var lastAppearance = guest.get("lastAppearance");
-                if (lastAppearance && lastAppearance.date) {
-                    date = moment(guest.get("lastAppearance").date).format('Do MMM YYYY');
-                }
-
-                guestRow.push({
-                    name: guest.get("name"),
-                    url: encodeURIComponent(guest.get("name")),
-                    description: guest.get("description"),
-                    image: guest.get("image"),
-                    twitterUsername: guest.get("twitterUsername"),
-                    episodes: guest.get("episodes"),
-                    site: guest.get("site"),
-                    lastAppearance: date
-                });
-
-                counter++;
-                if (counter == length || counter % numPerRow == 0) {
-                    guestRows.push({'guests': guestRow});
-                }
+            guestRow.push({
+                name: guest.get("name"),
+                url: encodeURIComponent(guest.get("name")),
+                description: guest.get("description"),
+                image: guest.get("image"),
+                twitterUsername: guest.get("twitterUsername"),
+                episodes: guest.get("episodes"),
+                site: guest.get("site"),
+                lastAppearance: date
             });
 
-            console.log(guestRows);
-            $scope.$apply(function() {
-                $scope.guestRows = guestRows;
-            });
-            jqueryFuncs.refreshScroll();
-        },
-        error: function(guests, error) {
+            counter++;
+            if (counter == length || counter % numPerRow == 0) {
+                guestRows.push({'guests': guestRow});
+            }
+        });
+        return guestRows;
+    };
 
+    this.load = function load() {
+        if (this.term == '') {
+            var guestsCollection = JreData.Guests.get(self.offset, self.limit);
+
+            guestsCollection.fetch({
+                success: function(podcastGuests) {
+                    self.offset += Number(podcastGuests.length);
+                    $scope.$apply(function() {
+                        $scope.guestRows = self.parse(podcastGuests);
+                    });
+                },
+                error: function(guests, error) {
+
+                }
+            });
         }
-    });
+    };
+
+    this.more = function more() {
+        var guestsCollection = JreData.Guests.get(self.offset, self.limit);
+
+        guestsCollection.fetch({
+            success: function(podcastGuests) {
+                self.offset += podcastGuests.length;
+                $scope.$apply(function() {
+                    var parsedGuests = self.parse(podcastGuests);
+                    parsedGuests.forEach(function(guest) {
+                        $scope.guestRows.push(guest);
+                    });
+                });
+            },
+            error: function(guests, error) {
+
+            }
+        });
+    };
+
+    this.search = function search() {
+        if (this.term != '') {
+            self.offset = 0;
+            var guestsCollection = JreData.Guests.get(self.offset, self.limit, this.term);
+            guestsCollection.fetch({
+                success: function(podcastGuests) {
+                    self.offset = Number(podcastGuests.length);
+
+                    var guests = self.parse(podcastGuests);
+                    $scope.$apply(function() {
+                        $scope.guestRows = guests;
+                    });
+                },
+                error: function(guests, error) {
+
+                }
+            });
+        } else {
+            this.load();
+        }
+    };
 });
