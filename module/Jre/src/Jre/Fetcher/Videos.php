@@ -14,6 +14,17 @@ class Videos
         "Joe Rogan Experience \#([0-9]+) \-[\-]* ([a-zA-Z\,\s\-\"\.\']+)([a-zA-Z\(\)]*)",
         "JRE \#([0-9]+) \- ([a-zA-Z\,\s\-\"\.\']+)([a-zA-Z\(\)]*)"
     ];
+    private static $pseudonymMap = [
+        'Joey Diaz' => [
+            'JOEY "COCO" DIAZ'
+        ],
+        'Cliffy Bleszinski' => [
+            'CLIFFY B'
+        ],
+        'Patrick Magee' => [
+            'PAT MAGEE'
+        ],
+    ];
 
     public function getRecent()
     {
@@ -45,11 +56,22 @@ class Videos
         $guests = explode(',', $guestStr);
         foreach ($guests as $guestName) {
             $guest = new Guest;
-            $guest->setName(trim($guestName));
+            $guest->setName($this->getRealName($guestName));
 
             $cleanGuests[] = $guest;
         }
         return $cleanGuests;
+    }
+
+    private function getRealName($name)
+    {
+        $name = trim($name);
+        foreach (self::$pseudonymMap as $realName => $pseudonyms) {
+            if (in_array(strtoupper($name), $pseudonyms)) {
+                return $realName;
+            }
+        }
+        return $name;
     }
 
     private function parsePodcasts($episodes)

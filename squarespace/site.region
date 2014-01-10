@@ -26,10 +26,9 @@
             </div>
             <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="http://www.thejoeroganexperiencepodcast.com/#home" class="scroll brand-1" title="Home page" data-spy="scroll">Home</a></li>
-                    <li><a class="brand-4" href="http://www.thejoeroganexperiencepodcast.com/#podcasts" title="Podcasts" data-spy="scroll">Podcasts</a></li>
-                    <li><a class="brand-3" href="http://www.thejoeroganexperiencepodcast.com/#guests" title="Guests" data-spy="scroll">Guests</a></li>
-                    <li><a class="brand-2" href="http://www.thejoeroganexperiencepodcast.com/#about" title="About" data-spy="scroll">About</a></li>
+                    <li class="active"><a href="/" class="scroll brand-1" title="Home page" data-spy="scroll">Home</a></li>
+                    <li><a class="brand-4" href="/podcasts" title="Podcasts" data-spy="scroll">Podcasts</a></li>
+                    <li><a class="brand-3" href="/guests" title="Guests" data-spy="scroll">Guests</a></li>
                 </ul>
             </div>
         </div><!-- /.navbar-container -->

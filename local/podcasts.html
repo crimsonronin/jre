@@ -18,7 +18,7 @@
         <script src="scripts/guests.js" combo="false"></script>
     </head>
     <body ng-app="jreApp" data-spy="scroll" data-target="#nav-collapse">
-       <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+        <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-container">
                 <div class="navbar-header">
                     <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
@@ -36,38 +36,39 @@
                 </div>
             </div><!-- /.navbar-container -->
         </nav>
-        <div class="page color-3" ng-controller="GuestsController as guestCtrl" ng-init="guestCtrl.init('0', '16', '2')">
+        <div class="page color-3" ng-controller="PodcastController as podcastCtrl" ng-init="podcastCtrl.init('0', '6', '3')">
             <div class="inner-page">
-                <h2 class="page-headline">Podcast Guests</h2>
+                <h2 class="page-headline">Podcasts</h2>
             </div>
             <div class="row inner-page">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search"  ng-model="guestCtrl.term" ng-enter="guestCtrl.search()">
+                    <input type="text" class="form-control" placeholder="Search"  ng-model="podcastCtrl.term" ng-enter="podcastCtrl.search()">
                 </div>
             </div>
-            <div class="row inner-page team" ng-repeat="row in guestRows">
-                <div class="col-md-6" ng-repeat="guest in row.guests">
-                    <div class="clearfix guest-details-container">
-                        <div ng-if="guest.image" class="col-md-4">
-                            <img class="img-responsive" ng-src="##guest.image##"/>
+            <div class="inner-page row" ng-repeat="row in podcastRows">
+                <div class="features list-inline">
+                    <div class="row">
+                        <div class="col-md-4" ng-repeat="podcast in row.podcasts">
+                            <div youtube code="podcast.featureVideo"></div>
+                            <h3>#<span ng-bind="podcast.episode"></span> - <span ng-bind="podcast.guests.join(', ')"></span></h3>
+                            <div class="color-3 podcast-date-container">
+                                <h6 class="clearfix">
+                                    <div class="pull-left">
+                                        <i class="fa fa-clock-o"></i> <span ng-bind="podcast.date"></span>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a ng-href="http://traffic.libsyn.com/joeroganexp/p##podcast.episode##.mp3" target="_blank">
+                                            <i class="fa fa-download"></i> Download mp3</a>
+                                    </div>
+                                </h6>
+                            </div>
+                            <p ng-bind="podcast.description"></p>
                         </div>
-                        <div class="col-md-8">
-                            <h4><span ng-bind="guest.name"></span></h4>
-                            <p ng-bind="guest.description"></p>
-                            <ul>
-                                <li><i class="fa fa-twitter"></i> <a ng-href="http://twitter.com/##guest.twitterUsername##">@<span ng-bind="guest.twitterUsername"></span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="color-4 guest-episodes-container">
-                        Episodes: <span ng-repeat="episode in guest.episodes">
-                            <a ng-href="http://twitter.com/##episode##">#<span ng-bind="episode"></span></a><span ng-if="$last != true" class="animate-if">, </span>
-                        </span>
                     </div>
                 </div>
             </div>
             <div class="row inner-page">
-                <div class="col-md-12"><a ng-click="guestCtrl.more()" class="btn btn-primary btn-centered" title="View more guests"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
+                <div class="col-md-12"><a ng-click="podcastCtrl.more()" class="btn btn-primary btn-centered" title="View more podcast"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
             </div>
         </div>
         <div class="page color-2">
