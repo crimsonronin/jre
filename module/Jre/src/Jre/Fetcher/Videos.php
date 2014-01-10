@@ -24,6 +24,11 @@ class Videos
         'Patrick Magee' => [
             'PAT MAGEE'
         ],
+        'Christopher Ryan' => [
+            'DR. CHRISTOPHER RYAN',
+            'CHRISTOPHER RYAN',
+            'CHRIS RYAN',
+        ]
     ];
 
     public function getRecent()
