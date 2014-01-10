@@ -56,10 +56,10 @@ class Guest
 
             if (empty($this->twitterUser)) {
                 $this->twitterUser = [
-                    'username' => 'unknown',
-                    'description' => 'unknown',
-                    'site' => 'unknown',
-                    'image' => 'unknown'
+                    'username' => '',
+                    'description' => '',
+                    'site' => '',
+                    'image' => ''
                 ];
             }
         }
@@ -165,10 +165,16 @@ class Guest
         return count($this->getEpisodes());
     }
 
+    public function getSearchName()
+    {
+        return str_replace(['"'], '', strtoupper($this->getName()));
+    }
+
     public function toArray()
     {
         return [
             'name' => $this->getName(),
+            'searchName' => $this->getSearchName(),
             'description' => $this->getDescription(),
             'twitterUsername' => $this->getTwitterUsername(),
             'site' => $this->getSite(),

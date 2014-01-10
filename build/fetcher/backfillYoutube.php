@@ -1,6 +1,8 @@
 <?php
 
-require_once ('../../vendor/autoload.php');
+set_time_limit(6000);
+
+require_once (__DIR__ . '/../../vendor/autoload.php');
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 $twitter = new Jre\Fetcher\Twitter(
@@ -11,7 +13,10 @@ $backfill = new Jre\Fetcher\Backfill();
 $backfill->setTwitter($twitter);
 
 $limit = 10;
-for ($i = 2; $i < 6; $i++) {
+$start = 40;
+$end = 80;
+for ($i = $start; $i < $end; $i++) {
+    echo 'Running batch: ' . $i . "\n";
     $podcasts = $backfill->go($i * $limit, $limit);
     var_dump($podcasts);
 }

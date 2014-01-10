@@ -101,7 +101,7 @@ class Podcast
 
     public function setEpisode($episode)
     {
-        $this->episode = $episode;
+        $this->episode = (int) $episode;
     }
 
     /**
@@ -136,7 +136,7 @@ class Podcast
     {
         return [
             'title' => $this->getTitle(),
-            'descrition' => $this->getDescription(),
+            'description' => $this->getDescription(),
             'airDate' => $this->getAirDate(),
             'episode' => $this->getEpisode(),
             'guests' => $this->getGuestsArray(),

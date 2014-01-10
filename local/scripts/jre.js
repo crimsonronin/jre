@@ -4,27 +4,34 @@ jqueryFuncs = window.jqueryFuncs || {};
 
 Parse.initialize("eQsrp5wXs19ySB8Cz9NjE6z3ziJNgqxNdG2sZUlG", "Qk4ykIaR0Vqqdgd3VDeDYxZYfHsMk49winrjEXoV");
 
-jqueryFuncs.refreshScroll = function() {
-    $('[data-spy="scroll"]').each(function() {
-        $(this).scrollspy('refresh');
-    });
-};
-jqueryFuncs.animateClicks = function() {
-
-};
-
 JreData.Podcasts = {
-    get: function(limit, offset) {
+    get: function(offset, limit, sort, search) {
         if (!limit) {
             limit = 3;
         }
         if (!offset) {
             offset = 0;
         }
+        if (!sort) {
+            sort = "airDate";
+        }
 
         var Podcast = Parse.Object.extend('Podcast');
-        var query = new Parse.Query(Podcast);
-        query.descending("episode");
+        
+        if (search) {
+            var nameQ = new Parse.Query(Podcast);
+            nameQ.equalTo('episode', search);
+
+            var episodeQ = new Parse.Query(Podcast);
+            episodeQ.equalTo('guests', search);
+
+            var query = Parse.Query.or(nameQ, episodeQ);
+        } else {
+
+            var query = new Parse.Query(Podcast);
+        }
+        
+        query.descending(sort);
         query.limit(limit);
         query.skip(offset);
 
@@ -38,12 +45,15 @@ JreData.Podcasts = {
 };
 
 JreData.Guests = {
-    get: function(offset, limit, search) {
+    get: function(offset, limit, sort, search) {
         if (!limit) {
             limit = 2;
         }
         if (!offset) {
             offset = 0;
+        }
+        if (!sort) {
+            sort = "lastAppearance";
         }
 
         var Guest = Parse.Object.extend('Guest');
@@ -61,7 +71,7 @@ JreData.Guests = {
             var query = new Parse.Query(Guest);
         }
 
-        query.descending("lastAppearance");
+        query.descending(sort);
         query.limit(limit);
         query.skip(offset);
 

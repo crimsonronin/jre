@@ -4,14 +4,18 @@ jreApp.controller('GuestsController', function($scope) {
     this.term = '';
     this.offset = 0;
     this.limit = 16;
+    this.sort = 'lastAppearance';
     this.numPerRow = 2;
 
-    this.init = function(offset, limit, numPerRow)
+    this.init = function(offset, limit, numPerRow, sort)
     {
         self.offset = Number(offset);
         self.limit = Number(limit);
         self.numPerRow = Number(numPerRow);
 
+        if (sort) {
+            self.sort = Number(sort);
+        }
         if (self.term == '') {
             self.load();
         }
@@ -55,7 +59,7 @@ jreApp.controller('GuestsController', function($scope) {
 
     this.load = function load() {
         if (this.term == '') {
-            var guestsCollection = JreData.Guests.get(self.offset, self.limit);
+            var guestsCollection = JreData.Guests.get(self.offset, self.limit, self.sort);
 
             guestsCollection.fetch({
                 success: function(podcastGuests) {
@@ -72,7 +76,7 @@ jreApp.controller('GuestsController', function($scope) {
     };
 
     this.more = function more() {
-        var guestsCollection = JreData.Guests.get(self.offset, self.limit);
+        var guestsCollection = JreData.Guests.get(self.offset, self.limit, self.sort);
 
         guestsCollection.fetch({
             success: function(podcastGuests) {
@@ -93,7 +97,7 @@ jreApp.controller('GuestsController', function($scope) {
     this.search = function search() {
         if (this.term != '') {
             self.offset = 0;
-            var guestsCollection = JreData.Guests.get(self.offset, self.limit, this.term);
+            var guestsCollection = JreData.Guests.get(self.offset, self.limit, self.sort, this.term);
             guestsCollection.fetch({
                 success: function(podcastGuests) {
                     self.offset = Number(podcastGuests.length);
