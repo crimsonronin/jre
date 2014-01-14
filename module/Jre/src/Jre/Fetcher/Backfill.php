@@ -31,7 +31,6 @@ class Backfill
 
     public function go($offset = 0, $limit = 10)
     {
-
         $parsed = [];
         $fetcher = new Videos;
         $parse = new Parse;
