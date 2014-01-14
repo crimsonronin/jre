@@ -19,13 +19,12 @@ JreData.Podcasts = {
         var Podcast = Parse.Object.extend('Podcast');
         
         if (search) {
-            var nameQ = new Parse.Query(Podcast);
-            nameQ.equalTo('episode', search);
+            var words = search.split(/\b/);
 
-            var episodeQ = new Parse.Query(Podcast);
-            episodeQ.equalTo('guests', search);
+            var searchQ = new Parse.Query(Podcast);
+            searchQ.equalTo('searchTerms', words);
 
-            var query = Parse.Query.or(nameQ, episodeQ);
+            var query = Parse.Query.or(searchQ);
         } else {
 
             var query = new Parse.Query(Podcast);
@@ -59,13 +58,12 @@ JreData.Guests = {
         var Guest = Parse.Object.extend('Guest');
 
         if (search) {
-            var nameQ = new Parse.Query(Guest);
-            nameQ.startsWith('name', search);
+            var words = search.split(/\b/);
 
-            var episodeQ = new Parse.Query(Guest);
-            episodeQ.equalTo('episodes', search);
+            var searchQ = new Parse.Query(Podcast);
+            searchQ.equalTo('searchTerms', words);
 
-            var query = Parse.Query.or(nameQ, episodeQ);
+            var query = Parse.Query.or(searchQ);
         } else {
 
             var query = new Parse.Query(Guest);

@@ -6,11 +6,15 @@ use \DateTime;
 
 class Podcast
 {
+
+    use SearchTrait;
+
     private $id;
     private $title;
     private $description;
     private $airDate;
     private $episode;
+    private $image;
     private $guests = [];
     private $videos = [];
 
@@ -132,8 +136,33 @@ class Podcast
         $this->videos[] = $video;
     }
 
+    /**
+     * 
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * 
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+    }
+
     public function toArray()
     {
+        $this->createSearchTerms(
+            $this->getTitle(),
+            $this->getDescription(),
+            $this->getEpisode(),
+            $this->getGuestsArray()
+        );
+
         return [
             'title' => $this->getTitle(),
             'description' => $this->getDescription(),
@@ -141,6 +170,7 @@ class Podcast
             'episode' => $this->getEpisode(),
             'guests' => $this->getGuestsArray(),
             'videos' => $this->getVideos(),
+            'searchTerms' => $this->getSearchTerms(),
         ];
     }
 

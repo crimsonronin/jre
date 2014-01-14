@@ -6,6 +6,9 @@ use \DateTime;
 
 class Guest
 {
+
+    use SearchTrait;
+
     private $id;
     private $twitter;
     private $name;
@@ -84,7 +87,7 @@ class Guest
     public function addEpisode($episode)
     {
         if (!empty($episode) && !in_array($episode, $this->episodes)) {
-            $this->episodes[] = $episode;
+            $this->episodes[] = (int) $episode;
         }
     }
 
@@ -165,16 +168,18 @@ class Guest
         return count($this->getEpisodes());
     }
 
-    public function getSearchName()
-    {
-        return str_replace(['"'], '', strtoupper($this->getName()));
-    }
-
     public function toArray()
     {
+        
+        $this->createSearchTerms(
+            $this->getName(),
+            $this->getDescription(),
+            $this->getTwitterUsername(),
+            $this->getEpisodes()
+        );
+        
         return [
             'name' => $this->getName(),
-            'searchName' => $this->getSearchName(),
             'description' => $this->getDescription(),
             'twitterUsername' => $this->getTwitterUsername(),
             'site' => $this->getSite(),
@@ -182,6 +187,7 @@ class Guest
             'lastAppearance' => $this->getLastAppearance(),
             'numberOfApperances' => $this->getNumberOfApperances(),
             'episodes' => $this->getEpisodes(),
+            'searchTerms' => $this->getSearchTerms(),
         ];
     }
 
