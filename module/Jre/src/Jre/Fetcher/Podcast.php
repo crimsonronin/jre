@@ -14,7 +14,8 @@ class Podcast
     private $description;
     private $airDate;
     private $episode;
-    private $image;
+    private $featureImage;
+    private $thumbnails = [];
     private $guests = [];
     private $videos = [];
 
@@ -136,31 +137,35 @@ class Podcast
         $this->videos[] = $video;
     }
 
-    /**
-     * 
-     * @return string
-     */
-    public function getImage()
+    public function getFeatureImage()
     {
-        return $this->image;
+        return $this->featureImage;
     }
 
-    /**
-     * 
-     * @param string $image
-     */
-    public function setImage($image)
+    public function getThumbnails()
     {
-        $this->image = $image;
+        return $this->thumbnails;
+    }
+
+    public function setFeatureImage($featureImage)
+    {
+        $this->featureImage = $featureImage;
+    }
+
+    public function setThumbnails($thumbnails)
+    {
+        $this->thumbnails = $thumbnails;
+    }
+
+    public function addThumbnail($thumbnail)
+    {
+        $this->thumbnails[] = $thumbnail;
     }
 
     public function toArray()
     {
         $this->createSearchTerms(
-            $this->getTitle(),
-            $this->getDescription(),
-            $this->getEpisode(),
-            $this->getGuestsArray()
+                $this->getDescription(), $this->getEpisode(), $this->getGuestsArray()
         );
 
         return [
@@ -170,6 +175,8 @@ class Podcast
             'episode' => $this->getEpisode(),
             'guests' => $this->getGuestsArray(),
             'videos' => $this->getVideos(),
+            'thumbnails' => $this->getThumbnails(),
+            'featureImage' => $this->getFeatureImage(),
             'searchTerms' => $this->getSearchTerms(),
         ];
     }

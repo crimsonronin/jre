@@ -40,7 +40,9 @@ jreApp.controller('PodcastController', function($scope) {
                 episode: podcast.get("episode"),
                 guests: podcast.get("guests"),
                 description: podcast.get("description"),
-                featureVideo: videos[0]
+                featureVideo: videos[0],
+                featureImage: podcast.get("featureImage"),
+                thumbnails: podcast.get("thumbnails")
             });
 
             counter++;

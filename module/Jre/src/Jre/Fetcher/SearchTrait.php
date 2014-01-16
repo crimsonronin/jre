@@ -7,7 +7,10 @@ use \DateTime;
 trait SearchTrait
 {
 
-    private $searchTerms = [];
+    protected static $excludedWords = [
+        'AN', 'THE', 'A', 'OF', 'AND', 'IS'
+    ];
+    protected $searchTerms = [];
 
     /**
      * 
@@ -43,11 +46,25 @@ trait SearchTrait
      */
     public function createSearchTerms()
     {
-        $strings = func_num_args();
+        $strings = func_get_args();
         foreach ($strings as $string) {
-            $words = explode(' ', $string);
-            foreach ($words as $word) {
-                $this->addSearchTerm(str_replace(['"'], '', strtoupper(trim($word))));
+            if (is_array($string) === true) {
+                foreach ($string as $subString) {
+                    $this->createSearchWords($subString);
+                }
+            } else {
+                $this->createSearchWords($string);
+            }
+        }
+    }
+
+    protected function createSearchWords($string)
+    {
+        $words = explode(' ', $string);
+        foreach ($words as $word) {
+            $word = str_replace(['"'], '', strtoupper(trim($word)));
+            if (!ctype_punct($word) && !in_array($word, self::$excludedWords) && strlen($word) > 2) {
+                $this->addSearchTerm($word);
             }
         }
     }
