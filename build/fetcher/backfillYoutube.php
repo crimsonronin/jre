@@ -12,9 +12,10 @@ $twitter = new Jre\Fetcher\Twitter(
 $backfill = new Jre\Fetcher\Backfill();
 $backfill->setTwitter($twitter);
 
-$limit = 10;
-$start = 40;
+$limit = 20;
+$start = 0;
 $end = 80;
+//$end = 80;
 for ($i = $start; $i < $end; $i++) {
     echo 'Running batch: ' . $i . "\n";
     $podcasts = $backfill->go($i * $limit, $limit);

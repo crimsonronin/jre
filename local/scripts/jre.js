@@ -20,7 +20,7 @@ JreData.Podcasts = {
         
         if (search) {
             var words = search.split(/\b/);
-
+console.log(words);
             var searchQ = new Parse.Query(Podcast);
             searchQ.equalTo('searchTerms', words);
 

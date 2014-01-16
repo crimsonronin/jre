@@ -10,9 +10,10 @@ use Jre\Fetcher\Podcast;
 
 class Videos
 {
+
     private static $format = [
-        "Joe Rogan Experience \#([0-9]+) \-[\-]* ([a-zA-Z\,\s\-\"\.\']+)([a-zA-Z\(\)]*)",
-        "JRE \#([0-9]+) \- ([a-zA-Z\,\s\-\"\.\']+)([a-zA-Z\(\)]*)"
+        "Joe Rogan Experience \#([0-9]+) \-[\-]* ([a-zA-Z\,\s\-\"\.\']+)(\(Part([\s0-9]+)\))?",
+        "JRE \#([0-9]+) \- ([a-zA-Z\,\s\-\"\.\']+)([\sa-zA-Z0-9\(\)]*)(\(Part([\s0-9]+)\))?"
     ];
     private static $pseudonymMap = [
         'Joey Diaz' => [
@@ -38,21 +39,24 @@ class Videos
 
     public function getList($offset = 0, $limit = 10, $orderBy = 'published')
     {
-        $videos = $this->get($offset, $limit, $orderBy);
+        return $this->get($offset, $limit, $orderBy);
+    }
 
-        $jreEpisodes = [];
-        /* @var $video VideoEntry */
-        foreach ($videos as $video) {
-            $title = $video->getTitle()->getText();
-            foreach (self::$format as $regex) {
-                if (preg_match('/' . $regex . '/', $title)) {
-                    $jreEpisodes[] = $video;
-                    break;
-                }
-            }
-        }
+    public function getPlaylist()
+    {
+        $yt = new YouTube();
+        $yt->getHttpClient()->setOptions(array('sslverifypeer' => false));
 
-        return $this->parsePodcasts($jreEpisodes);
+        $query = new VideoQuery;
+        $query->setAuthor('PowerfulJRE');
+        $query->setStartIndex($offset);
+        $query->setMaxResults($limit);
+        $query->setOrderBy($orderBy);
+
+        $videos = $yt->getVideoFeed($query);
+
+        $feedUrl = $playlistEntry->getPlaylistVideoFeedUrl();
+        $playlistVideoFeed = $yt->getPlaylistVideoFeed($feedUrl);
     }
 
     private function parseGuests($guestStr)
@@ -83,19 +87,21 @@ class Videos
     {
         $podcasts = [];
         /* @var $ep VideoEntry */
-        foreach ($episodes as $ep) {
+        foreach ($episodes as $i => $ep) {
             $title = $ep->getTitle()->getText();
             $videoId = $ep->getVideoId();
             $description = $ep->getContent()->getText();
-            $thumbnails = $ep->getVideoThumbnails();
+            $thumbnails = $this->getThumbnails($ep->getVideoThumbnails());
+            $featureImage = $this->getFeatureImage($ep->getVideoThumbnails());
+
             $airDate = new DateTime($ep->getPublished()->getText());
 
             $guests = $this->getGuests($title);
             $episode = $this->getEpisode($title);
             $part = $this->getMultiPart($title);
 
-            if ($part !== false && $part > 1 && isset($podcast)) {
-                $podcast->addVideo($videoId);
+            if ($part !== false && $part > 1 && isset($podcasts[$i - 1])) {
+                $podcasts[$i - 1]->addVideo($videoId);
             } else {
                 $podcast = new Podcast();
                 $podcast->setAirDate($airDate);
@@ -104,11 +110,35 @@ class Videos
                 $podcast->setTitle($title);
                 $podcast->addVideo($videoId);
                 $podcast->setGuests($guests);
+                $podcast->setThumbnails($thumbnails);
+                $podcast->setFeatureImage($featureImage);
 
-                $podcasts[] = $podcast;
+                $podcasts[$i] = $podcast;
             }
         }
         return $podcasts;
+    }
+
+    private function getThumbnails($images = [])
+    {
+        $thumbnails = [];
+        foreach ($images as $image) {
+            $thumbnails[] = $image['url'];
+        }
+        return $thumbnails;
+    }
+
+    private function getFeatureImage($images = [])
+    {
+        $currentWidth = 0;
+        $currentHeight = 0;
+        $featureImage = null;
+        foreach ($images as $image) {
+            if ($image['width'] > $currentWidth && $image['height'] > $currentHeight) {
+                $featureImage = $image['url'];
+            }
+        }
+        return $featureImage;
     }
 
     private function getGuests($title)
@@ -141,8 +171,10 @@ class Videos
         $multiPart = false;
         foreach (self::$format as $regex) {
             if (preg_match('/' . $regex . '/', $title, $matches)) {
-                $multiPart = $matches[3];
-                break;
+                if (isset($matches[4])) {
+                    $multiPart = (int) (trim($matches[4]));
+                    break;
+                }
             }
         }
         return $multiPart;
@@ -150,6 +182,7 @@ class Videos
 
     private function get($offset = 0, $limit = 10, $orderBy = 'published')
     {
+        $jreEpisodes = [];
         $yt = new YouTube();
         $yt->getHttpClient()->setOptions(array('sslverifypeer' => false));
 
@@ -159,7 +192,20 @@ class Videos
         $query->setMaxResults($limit);
         $query->setOrderBy($orderBy);
 
-        return $yt->getVideoFeed($query);
+        $videos = $yt->getVideoFeed($query);
+
+        /* @var $video VideoEntry */
+        foreach ($videos as $video) {
+            $title = $video->getTitle()->getText();
+            foreach (self::$format as $regex) {
+                if (preg_match('/' . $regex . '/', $title)) {
+                    $jreEpisodes[] = $video;
+                    break;
+                }
+            }
+        }
+
+        return $this->parsePodcasts($jreEpisodes);
     }
 
 }
