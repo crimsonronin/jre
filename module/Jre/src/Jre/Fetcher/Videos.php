@@ -24,6 +24,11 @@ class Videos
         'Patrick Magee' => [
             'PAT MAGEE'
         ],
+        'Christopher Ryan' => [
+            'DR. CHRISTOPHER RYAN',
+            'CHRISTOPHER RYAN',
+            'CHRIS RYAN',
+        ]
     ];
 
     public function getRecent()
@@ -82,6 +87,7 @@ class Videos
             $title = $ep->getTitle()->getText();
             $videoId = $ep->getVideoId();
             $description = $ep->getContent()->getText();
+            $thumbnails = $ep->getVideoThumbnails();
             $airDate = new DateTime($ep->getPublished()->getText());
 
             $guests = $this->getGuests($title);
