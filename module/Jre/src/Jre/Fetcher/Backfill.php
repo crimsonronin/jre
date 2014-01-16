@@ -9,6 +9,7 @@ use Jre\Fetcher\Guest;
 
 class Backfill
 {
+
     private $twitter;
 
     /**
@@ -39,6 +40,7 @@ class Backfill
 
         /* @var $podcast Jre\Fetcher\Podcast */
         foreach ($podcasts as $podcast) {
+            var_dump($podcast->getTitle());
             $guests = $podcast->getGuests();
 
             //save podcast
