@@ -1,4 +1,4 @@
-jreApp.controller('PodcastController', function($scope) {
+JreApp.controller('PodcastController', function($scope, $location) {
     $scope.podcasts = [];
     var self = this;
     this.term = '';
@@ -6,10 +6,11 @@ jreApp.controller('PodcastController', function($scope) {
     this.limit = 16;
     this.sort = 'airDate';
     this.numPerRow = 2;
+    this.queryString = JreFuncs.getQueryString($location.absUrl());
+    this.featurePodcastContainer = $('#featurePodcast');
 
     this.init = function(offset, limit, numPerRow, sort)
     {
-        console.log(offset, limit, numPerRow, sort);
         self.offset = Number(offset);
         self.limit = Number(limit);
         self.numPerRow = Number(numPerRow);
@@ -19,9 +20,35 @@ jreApp.controller('PodcastController', function($scope) {
         if (self.term == '') {
             self.load();
         }
+
+        if (this.queryString && this.queryString.episode) {
+            //get main video
+            this.get(this.queryString.episode);
+        }
     };
 
-    this.parse = function parse(podcastEpisodes) {
+    this.get = function get(podcastEpisode) {
+        if (podcastEpisode) {
+            var podcastsCollection = JreData.Podcasts.get(0, 1, 'episode', podcastEpisode);
+
+            podcastsCollection.fetch({
+                success: function(podcastEpisodes) {
+                    podcastEpisodes.each(function(podcast) {
+                        $scope.$apply(function() {
+                            $scope.featurePodcast = self.parseEpisode(podcast);
+                            self.featurePodcastContainer.removeClass('hide');
+                            $("html, body").animate({scrollTop: 0}, "slow");
+                        });
+                    });
+                },
+                error: function(podcasts, error) {
+
+                }
+            });
+        }
+    };
+
+    this.parseEpisodes = function parseEpisodes(podcastEpisodes) {
         var podcastRows = new Array;
         var numPerRow = self.numPerRow;
         var counter = 0;
@@ -33,16 +60,7 @@ jreApp.controller('PodcastController', function($scope) {
                 podcastRow = new Array;
             }
 
-            var videos = podcast.get("videos");
-            var date = moment(podcast.get("airDate").date).format('Do MMM YYYY');
-
-            podcastRow.push({
-                date: date,
-                episode: podcast.get("episode"),
-                guests: podcast.get("guests"),
-                description: podcast.get("description"),
-                featureVideo: videos[0]
-            });
+            podcastRow.push(self.parseEpisode(podcast));
 
             counter++;
             if (counter == length || counter % numPerRow == 0) {
@@ -52,6 +70,20 @@ jreApp.controller('PodcastController', function($scope) {
         return podcastRows;
     };
 
+    this.parseEpisode = function parseEpisode(podcast) {
+        var parsedEpisode = {
+            date: moment(podcast.get("airDate").date).format('Do MMM YYYY'),
+            episode: podcast.get("episode"),
+            guests: podcast.get("guests"),
+            description: podcast.get("description"),
+            featureVideo: podcast.get("videos")[0],
+            featureImage: podcast.get("thumbnails")[0],
+            thumbnails: podcast.get("thumbnails")
+        };
+        return parsedEpisode;
+    };
+
+
     this.load = function load() {
         if (this.term == '') {
             var podcastsCollection = JreData.Podcasts.get(self.offset, self.limit, self.sort);
@@ -59,9 +91,9 @@ jreApp.controller('PodcastController', function($scope) {
             podcastsCollection.fetch({
                 success: function(podcastEpisodes) {
                     self.offset += Number(podcastEpisodes.length);
-                    
+
                     $scope.$apply(function() {
-                        $scope.podcastRows = self.parse(podcastEpisodes);
+                        $scope.podcastRows = self.parseEpisodes(podcastEpisodes);
                     });
                 },
                 error: function(podcasts, error) {
@@ -72,13 +104,13 @@ jreApp.controller('PodcastController', function($scope) {
     };
 
     this.more = function more() {
-        var podcastsCollection = JreData.Podcasts.get(self.offset, self.limit, self.sort);
+        var podcastsCollection = JreData.Podcasts.get(self.offset, self.limit, self.sort, self.term);
 
         podcastsCollection.fetch({
             success: function(podcastEpisodes) {
                 self.offset += podcastEpisodes.length;
                 $scope.$apply(function() {
-                    var parsedPodcasts = self.parse(podcastEpisodes);
+                    var parsedPodcasts = self.parseEpisodes(podcastEpisodes);
                     parsedPodcasts.forEach(function(podcast) {
                         $scope.podcastRows.push(podcast);
                     });
@@ -93,14 +125,15 @@ jreApp.controller('PodcastController', function($scope) {
     this.search = function search() {
         if (this.term != '') {
             self.offset = 0;
+            self.term = this.term;
 
-            var podcastsCollection = JreData.Podcasts.get(self.offset, self.limit, self.sort, this.term);
+            var podcastsCollection = JreData.Podcasts.get(self.offset, self.limit, self.sort, self.term);
 
             podcastsCollection.fetch({
                 success: function(podcastEpisodes) {
                     self.offset = Number(podcastEpisodes.length);
                     $scope.$apply(function() {
-                        $scope.podcastRows = self.parse(podcastEpisodes);
+                        $scope.podcastRows = self.parseEpisodes(podcastEpisodes);
                     });
                 },
                 error: function(podcasts, error) {

@@ -1,0 +1,10 @@
+AddDefaultCharset utf-8
+
+Options +FollowSymLinks
+RewriteEngine On
+
+Options -Indexes
+DirectorySlash Off
+
+RewriteRule ^podcasts$ podcasts.html [L,QSA]
+RewriteRule ^guests$ guests.html [L,QSA]

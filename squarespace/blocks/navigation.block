@@ -1,0 +1,22 @@
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <div class="navbar-container">
+        <div class="navbar-header">
+            <button data-target=".navbar-ex1-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <i class="fa fa-bars"></i>
+            </button>
+            <a href="/" class="navbar-brand">The Joe Rogan Experience</a> 
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {.repeated section items}
+                <li {.section active}class="active"{.end}>
+                    {.section collection}
+                    <a href="{fullUrl}">{navigationTitle}</a>
+                    {.end}
+                </li>
+                {.end}
+            </ul>
+        </div>
+    </div><!-- /.navbar-container -->
+</nav>

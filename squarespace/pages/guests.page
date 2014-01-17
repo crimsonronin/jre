@@ -3,11 +3,11 @@
         <h2 class="page-headline">Podcast Guests</h2>
     </div>
     <div class="row inner-page">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search"  ng-model="guestCtrl.term" ng-enter="guestCtrl.search()">
+        <div class="form-group col-md-12">
+            <input type="text" class="form-control" placeholder="Search eg. Joey Diaz or Bert"  ng-model="guestCtrl.term" ng-enter="guestCtrl.search()">
         </div>
     </div>
-    <div class="row inner-page team" ng-repeat="row in guestRows">
+    <div class="row guest-row inner-page team" ng-repeat="row in guestRows">
         <div class="col-md-6" ng-repeat="guest in row.guests">
             <div class="clearfix guest-details-container">
                 <div ng-if="guest.image" class="col-md-4">
@@ -16,15 +16,18 @@
                 <div class="col-md-8">
                     <h4><span ng-bind="guest.name"></span></h4>
                     <p ng-bind="guest.description"></p>
-                    <ul>
+                    <ul ng-if="guest.twitterUsername">
                         <li><i class="fa fa-twitter"></i> <a ng-href="http://twitter.com/##guest.twitterUsername##">@<span ng-bind="guest.twitterUsername"></span></a></li>
                     </ul>
                 </div>
             </div>
             <div class="color-4 guest-episodes-container">
                 Episodes: <span ng-repeat="episode in guest.episodes">
-                    <a ng-href="http://twitter.com/##episode##">#<span ng-bind="episode"></span></a><span ng-if="$last != true" class="animate-if">, </span>
+                    <a ng-href="/podcasts?episode=##episode##">#<span ng-bind="episode"></span></a><span ng-if="$last != true" class="animate-if">, </span>
                 </span>
+            </div>
+            <div class="col-md-12 visible-xs">
+                <hr>
             </div>
         </div>
     </div>

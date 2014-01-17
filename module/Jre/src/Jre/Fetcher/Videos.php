@@ -10,7 +10,6 @@ use Jre\Fetcher\Podcast;
 
 class Videos
 {
-
     private static $format = [
         "Joe Rogan Experience \#([0-9]+) \-[\-]* ([a-zA-Z\,\s\-\"\.\']+)(\(Part([\s0-9]+)\))?",
         "JRE \#([0-9]+) \- ([a-zA-Z\,\s\-\"\.\']+)([\sa-zA-Z0-9\(\)]*)(\(Part([\s0-9]+)\))?"
@@ -135,6 +134,8 @@ class Videos
         $featureImage = null;
         foreach ($images as $image) {
             if ($image['width'] > $currentWidth && $image['height'] > $currentHeight) {
+                $currentWidth = $image['width'];
+                $currentHeight = $image['height'];
                 $featureImage = $image['url'];
             }
         }

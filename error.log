@@ -1,0 +1,18 @@
+[17-Jan-2014 00:27:06 UTC] PHP Fatal error:  Uncaught exception 'Zend\Http\Client\Adapter\Exception\RuntimeException' with message 'Error in cURL request: name lookup timed out' in /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client/Adapter/Curl.php:420
+Stack trace:
+#0 /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client.php(1370): Zend\Http\Client\Adapter\Curl->write('GET', Object(Zend\Uri\Http), '1.1', Array, '')
+#1 /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client.php(878): Zend\Http\Client->doRequest(Object(Zend\Uri\Http), 'GET', true, Array, '')
+#2 /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client.php(798): Zend\Http\Client->send(Object(Zend\Http\Request))
+#3 /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php(107): Zend\Http\Client->dispatch(Object(Zend\Http\Request))
+#4 /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php(35): Jre\Fetcher\Parse->get('Podcast', Array)
+#5 /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Parse.php(18): Jre\Fetcher\Parse->save('Podcast', Array, Array)
+#6 /mnt/www/zoop/module/Jre/src/Jr in /mnt/www/zoop/vendor/zendframework/zend-http/Zend/Http/Client/Adapter/Curl.php on line 420
+[17-Jan-2014 00:42:29 UTC] PHP Fatal error:  Uncaught exception 'ZendGData\App\HttpException' with message 'Expected response code 200, got 400
+You cannot request beyond item 500.' in /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php:685
+Stack trace:
+#0 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/GData.php(201): ZendGData\App->performHttpRequest('GET', 'https://gdata.y...', Array, NULL, NULL, NULL)
+#1 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php(857): ZendGData\GData->performHttpRequest('GET', 'https://gdata.y...', Array)
+#2 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php(743): ZendGData\App->get('https://gdata.y...', NULL)
+#3 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php(188): ZendGData\App->importUrl('https://gdata.y...', '\ZendGData\YouT...', NULL)
+#4 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/GData.php(143): ZendGData\App->getFeed('https://gdata.y...', '\ZendGData\YouT...')
+#5 /mnt/www/zoop/vendor/zendframework/zendgd in /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php on line 685
