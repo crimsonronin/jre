@@ -1,17 +1,36 @@
-<div class="page color-3" ng-controller="PodcastController as podcastCtrl" ng-init="podcastCtrl.init('0', '6', '3')">
-    <div class="inner-page">
-        <h2 class="page-headline">Podcasts</h2>
-    </div>
-    <div class="row inner-page">
-        <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search"  ng-model="podcastCtrl.term" ng-enter="podcastCtrl.search()">
+<div ng-controller="PodcastController as podcastCtrl" ng-init="podcastCtrl.init('0', '6', '3')">
+    <div class="page color-1 hide" id="featurePodcast">
+        <div class="inner-page">
+            <h2 class="page-headline large">Episode #<span ng-bind="featurePodcast.episode"></span> - <span ng-bind="featurePodcast.guests.join(', ')"></span></h2>
+        </div>
+        <div class="row inner-page">
+            <div class="col-md-8 col-md-push-4 lazy-container loaded">
+                <div youtube code="featurePodcast.featureVideo"></div>
+            </div>
+            <div class="col-md-4 col-md-pull-8">
+                <div><h3><i class="fa fa-clock-o"></i> <span ng-bind="featurePodcast.date"></span></h3></div>
+                <div><p ng-bind="featurePodcast.description"></p></div>
+                <div><a ng-href="http://traffic.libsyn.com/joeroganexp/p##featurePodcast.episode##.mp3" target="_blank"><i class="fa fa-download"></i> Download mp3</a></div>
+            </div>
         </div>
     </div>
-    <div class="inner-page row" ng-repeat="row in podcastRows">
-        <div class="features list-inline">
-            <div class="row">
+    <div  class="page color-3">
+        <div class="inner-page">
+            <h2 class="page-headline">Podcasts</h2>
+        </div>
+        <div class="row inner-page">
+            <div class="form-group col-md-12">
+                <input type="text" class="form-control" placeholder="Search eg. Joey Diaz or Bert or 432"  ng-model="podcastCtrl.term" ng-enter="podcastCtrl.search()">
+            </div>
+        </div>
+        <div class="inner-page row podcast-row" ng-repeat="row in podcastRows">
+            <div class="features list-inline">
                 <div class="col-md-4" ng-repeat="podcast in row.podcasts">
-                    <div youtube code="podcast.featureVideo"></div>
+                    <div ng-if="podcast.featureImage" class="podcast-feature-image col-md-12">
+                        <a ng-click="podcastCtrl.get(podcast.episode)">
+                            <img class="img-responsive" ng-src="##podcast.featureImage##"/>
+                        </a>
+                    </div>
                     <h3>#<span ng-bind="podcast.episode"></span> - <span ng-bind="podcast.guests.join(', ')"></span></h3>
                     <div class="color-3 podcast-date-container">
                         <h6 class="clearfix">
@@ -25,12 +44,15 @@
                         </h6>
                     </div>
                     <p ng-bind="podcast.description"></p>
+                    <div class="col-md-12 visible-xs">
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row inner-page">
-        <div class="col-md-12"><a ng-click="podcastCtrl.more()" class="btn btn-primary btn-centered" title="View more podcast"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
+        <div class="row inner-page">
+            <div class="col-md-12"><a ng-click="podcastCtrl.more()" class="btn btn-primary btn-centered" title="View more podcast"> <i class="fa fa-arrow-circle-o-down"></i> More</a></div>
+        </div>
     </div>
 </div>
 <div class="page color-2">

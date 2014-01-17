@@ -31,3 +31,26 @@ ul.bullet {
 ul.bullet li {
     padding: 5px;
 }
+
+.podcast-feature-image a:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    hr {
+        width: 100%;
+        margin: 40px 0;
+    }
+    .team img {
+        margin: 0;
+        width: 100%;
+    }
+    .podcast-row,
+    .guest-row {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}

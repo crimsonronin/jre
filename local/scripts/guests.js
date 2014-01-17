@@ -1,4 +1,4 @@
-jreApp.controller('GuestsController', function($scope) {
+JreApp.controller('GuestsController', function($scope) {
     $scope.guests = [];
     var self = this;
     this.term = '';
@@ -16,7 +16,7 @@ jreApp.controller('GuestsController', function($scope) {
         if (sort) {
             self.sort = Number(sort);
         }
-        if (self.term == '') {
+        if (!self.term || self.term == '') {
             self.load();
         }
     };
@@ -27,7 +27,6 @@ jreApp.controller('GuestsController', function($scope) {
         var counter = 0;
         var length = podcastGuests.length;
         var guestRow = new Array;
-
         podcastGuests.each(function(guest) {
             if (counter == 0 || counter % numPerRow == 0) {
                 guestRow = new Array;

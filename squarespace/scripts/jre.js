@@ -1,8 +1,34 @@
 JreData = window.JreData || {};
-jreApp = window.jreApp || {};
-jqueryFuncs = window.jqueryFuncs || {};
+JreApp = window.JreApp || {};
+JreFuncs = window.JreFuncs || {};
 
 Parse.initialize("eQsrp5wXs19ySB8Cz9NjE6z3ziJNgqxNdG2sZUlG", "Qk4ykIaR0Vqqdgd3VDeDYxZYfHsMk49winrjEXoV");
+
+JreFuncs.parseSearchTerm = function(search) {
+    var words = search.split(/\b/);
+    var wordsUpper = new Array;
+    words.forEach(function(word) {
+        if (!/^\s*$/.test(word)) {
+            wordsUpper.push(word.toUpperCase());
+        }
+    });
+    return wordsUpper;
+};
+
+
+JreFuncs.getQueryString = function(absUrl) {
+    var urlParts = absUrl.split('?');
+    if (urlParts[1]) {
+        var qs = {};
+        var nvps = urlParts[1].split('&');
+        nvps.forEach(function(nvp) {
+            var v = nvp.split('=');
+            qs[v[0]] = v[1];
+        });
+        return qs;
+    }
+    return false;
+};
 
 JreData.Podcasts = {
     get: function(offset, limit, sort, search) {
@@ -13,24 +39,20 @@ JreData.Podcasts = {
             offset = 0;
         }
         if (!sort) {
-            sort = "airDate";
+            sort = "episode";
         }
 
         var Podcast = Parse.Object.extend('Podcast');
-        
-        if (search) {
-            var nameQ = new Parse.Query(Podcast);
-            nameQ.equalTo('episode', search);
-
-            var episodeQ = new Parse.Query(Podcast);
-            episodeQ.equalTo('guests', search);
-
-            var query = Parse.Query.or(nameQ, episodeQ);
+        if (search && search != '' && (typeof search === 'number' || !isNaN(search))) {
+            var query = new Parse.Query(Podcast);
+            query.equalTo('episode', Number(search));
+        } else if (search) {
+            var query = new Parse.Query(Podcast);
+            query.containsAll('searchTerms', JreFuncs.parseSearchTerm(search));
         } else {
-
             var query = new Parse.Query(Podcast);
         }
-        
+
         query.descending(sort);
         query.limit(limit);
         query.skip(offset);
@@ -59,15 +81,9 @@ JreData.Guests = {
         var Guest = Parse.Object.extend('Guest');
 
         if (search) {
-            var nameQ = new Parse.Query(Guest);
-            nameQ.startsWith('name', search);
-
-            var episodeQ = new Parse.Query(Guest);
-            episodeQ.equalTo('episodes', search);
-
-            var query = Parse.Query.or(nameQ, episodeQ);
+            var query = new Parse.Query(Guest);
+            query.containsAll('searchTerms', JreFuncs.parseSearchTerm(search));
         } else {
-
             var query = new Parse.Query(Guest);
         }
 
@@ -84,12 +100,11 @@ JreData.Guests = {
 
 };
 
-jreApp = angular.module('jreApp', []).config(function($interpolateProvider) {
+JreApp = angular.module('JreApp', []).config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('##').endSymbol('##');
-}
-);
+});
 
-jreApp.directive('youtube', function($sce) {
+JreApp.directive('youtube', function($sce) {
     return {
         restrict: 'EA',
         scope: {code: '='},
@@ -105,7 +120,7 @@ jreApp.directive('youtube', function($sce) {
     };
 });
 
-jreApp.directive('ngEnter', function() {
+JreApp.directive('ngEnter', function() {
     return function(scope, element, attrs) {
         element.bind("keydown keypress", function(event) {
             if (event.which === 13) {

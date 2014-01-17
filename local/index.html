@@ -10,14 +10,14 @@
         <script src="scripts/jquery-1.8.1.min.js"></script>
         <script src="scripts/bootstrap.min.js"></script>
 
-        <script src="scripts/parse-1.1.3.min.js"></script>
         <script src="scripts/angular.min.js"></script>
+        <script src="scripts/parse-1.2.16.min.js"></script>
         <script src="scripts/moment.min.js"></script>
         <script src="scripts/jre.js" combo="false"></script>
         <script src="scripts/podcasts.js" combo="false"></script>
         <script src="scripts/guests.js" combo="false"></script>
     </head>
-    <body ng-app="jreApp">
+    <body ng-app="JreApp">
         <nav role="navigation" class="navbar navbar-default navbar-fixed-top">
             <div class="navbar-container">
                 <div class="navbar-header">
@@ -25,7 +25,7 @@
                         <span class="sr-only">Toggle navigation</span>
                         <i class="fa fa-bars"></i>
                     </button>
-                    <a href="http://www.thejoeroganexperiencepodcast.com/" class="navbar-brand">The Joe Rogan Experience</a> 
+                    <a href="/" class="navbar-brand">The Joe Rogan Experience</a> 
                 </div>
                 <div class="collapse navbar-collapse navbar-ex1-collapse" id="nav-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -63,7 +63,11 @@
                 <div class="features list-inline">
                     <div class="row">
                         <div class="col-md-4" ng-repeat="podcast in row.podcasts">
-                            <div youtube code="podcast.featureVideo"></div>
+                            <div ng-if="podcast.featureImage" class="podcast-feature-image col-md-12">
+                                <a ng-href="/podcasts?episode=##podcast.episode##">
+                                    <img class="img-responsive" ng-src="##podcast.featureImage##"/>
+                                </a>
+                            </div>
                             <h3>#<span ng-bind="podcast.episode"></span> - <span ng-bind="podcast.guests.join(', ')"></span></h3>
                             <div class="color-3 podcast-date-container">
                                 <h6 class="clearfix">
@@ -72,11 +76,15 @@
                                     </div>
                                     <div class="pull-right">
                                         <a ng-href="http://traffic.libsyn.com/joeroganexp/p##podcast.episode##.mp3" target="_blank">
-                                            <i class="fa fa-download"></i> Download mp3</a>
+                                            <i class="fa fa-download"></i> Download mp3
+                                        </a>
                                     </div>
                                 </h6>
                             </div>
                             <p ng-bind="podcast.description"></p>
+                            <div class="col-md-12 visible-xs">
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,7 +113,7 @@
                     </div>
                     <div class="color-4 guest-episodes-container">
                         Episodes: <span ng-repeat="episode in guest.episodes">
-                            <a ng-href="http://twitter.com/##episode##">#<span ng-bind="episode"></span></a><span ng-if="$last != true" class="animate-if">, </span>
+                            <a ng-href="/podcasts?episode=##episode##">#<span ng-bind="episode"></span></a><span ng-if="$last != true" class="animate-if">, </span>
                         </span>
                     </div>
                 </div>
@@ -135,7 +143,7 @@
                     <hr>
                     <p>Also if you want an awesome free online store check out my company <a href="http://zoopcommerce.com">zoopcommerce.com</a>.</p>
                     <p>Grab the source code of this site on github:</p>
-                    <a title="Check out more features" class="btn btn-primary btn-centered" href="#"> <i class="fa fa-github"></i> View on GitHub</a>
+                    <a title="Check out more features" class="btn btn-primary btn-centered" href="https://github.com/crimsonronin/jre" target="_blank"> <i class="fa fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
