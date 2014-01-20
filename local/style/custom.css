@@ -1,0 +1,56 @@
+.color-1 a,
+.color-2 a {
+    color: #000;
+}
+.color-1 a:hover,
+.color-2 a:hover {
+    color: #fff;
+}
+.color-1 a.btn,
+.color-2 a.btn {
+    color: #fff;
+}
+
+.guest-details-container {
+    min-height: 250px;
+}
+
+.guest-episodes-container,
+.podcast-date-container {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.guest-episodes-container h6,
+.podcast-date-container h6 {
+    margin: 0;
+}
+
+ul.bullet {
+    list-style: disc;
+}
+ul.bullet li {
+    padding: 5px;
+}
+
+.podcast-feature-image a:hover {
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    hr {
+        width: 100%;
+        margin: 40px 0;
+    }
+    .team img {
+        margin: 0;
+        width: 100%;
+    }
+    .podcast-row,
+    .guest-row {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
