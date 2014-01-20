@@ -68,7 +68,7 @@ class Backfill
                             $existingGuest->addEpisode($podcast->getEpisode());
 
                             if ($podcast->getAirDate() > $existingGuest->getLastAppearance()) {
-                                $existingGuest->setLastAppearance($podcast->getLastAppearance());
+                                $existingGuest->setLastAppearance($podcast->getAirDate());
                             }
 
                             $parse->saveGuest($existingGuest);

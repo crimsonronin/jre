@@ -13,8 +13,8 @@ $backfill = new Jre\Fetcher\Backfill();
 $backfill->setTwitter($twitter);
 
 $limit = 20;
-$start = 21;
-$end = 80;
+$start = 0;
+$end = 1;
 //$end = 80;
 for ($i = $start; $i < $end; $i++) {
     echo 'Running batch: ' . $i . "\n";

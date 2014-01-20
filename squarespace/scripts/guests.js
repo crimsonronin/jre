@@ -36,6 +36,12 @@ JreApp.controller('GuestsController', function($scope) {
             if (lastAppearance && lastAppearance.date) {
                 date = moment(guest.get("lastAppearance").date).format('Do MMM YYYY');
             }
+            var episodes = guest.get("episodes");
+            if (episodes.length > 0) {
+                episodes.sort(function(a, b) {
+                    return a - b;
+                }).reverse();
+            }
 
             guestRow.push({
                 name: guest.get("name"),
@@ -43,7 +49,7 @@ JreApp.controller('GuestsController', function($scope) {
                 description: guest.get("description"),
                 image: guest.get("image"),
                 twitterUsername: guest.get("twitterUsername"),
-                episodes: guest.get("episodes"),
+                episodes: episodes,
                 site: guest.get("site"),
                 lastAppearance: date
             });

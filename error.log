@@ -16,3 +16,7 @@ Stack trace:
 #3 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php(188): ZendGData\App->importUrl('https://gdata.y...', '\ZendGData\YouT...', NULL)
 #4 /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/GData.php(143): ZendGData\App->getFeed('https://gdata.y...', '\ZendGData\YouT...')
 #5 /mnt/www/zoop/vendor/zendframework/zendgd in /mnt/www/zoop/vendor/zendframework/zendgdata/library/ZendGData/App.php on line 685
+[20-Jan-2014 06:18:51 UTC] PHP Fatal error:  Call to undefined method Jre\Fetcher\Podcast::getLastAppearance() in /mnt/www/zoop/module/Jre/src/Jre/Fetcher/Backfill.php on line 71
+[20-Jan-2014 06:18:51 UTC] PHP Stack trace:
+[20-Jan-2014 06:18:51 UTC] PHP   1. {main}() /mnt/www/zoop/build/fetcher/backfillYoutube.php:0
+[20-Jan-2014 06:18:51 UTC] PHP   2. Jre\Fetcher\Backfill->go() /mnt/www/zoop/build/fetcher/backfillYoutube.php:21
